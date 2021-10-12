@@ -47,6 +47,7 @@ public class MyWorker extends Worker {
                         Location location = task.getResult();
                         if (location == null) {
                             requestNewLocationData();
+                            saveLocationInData();
                         } else {
                             latStr=location.getLatitude() + "";
                             longStr=location.getLongitude() + "";
@@ -58,7 +59,6 @@ public class MyWorker extends Worker {
     }
     @SuppressLint("MissingPermission")
     private void requestNewLocationData() {
-
         LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setInterval(5);
@@ -75,7 +75,6 @@ public class MyWorker extends Worker {
             Location mLastLocation = locationResult.getLastLocation();
             latStr = mLastLocation.getLatitude() + "";
             longStr= mLastLocation.getLongitude() + "";
-            saveLocationInData();
         }
     };
 
